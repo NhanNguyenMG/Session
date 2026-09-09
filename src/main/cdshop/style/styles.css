@@ -1,0 +1,8 @@
+h1,h2,h3{
+    color:teal;
+}
+
+table, td, th{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
