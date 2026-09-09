@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,14 +18,38 @@
     </tr>
 <c:forEach var="item" items="${cart.cartItemList}">
     <tr>
-        <td>${item.quantity}</td>
+        <td>
+         <form action = "cart" method = "post">
+                <input type = "hidden" name="action" value="update">
+                <input type = "hidden" name="description" value = "${item.description}">
+                <input type = "text" name="quantity" value="${item.quantity}">
+                <button type ="submit">Update</button>
+         </form>
+        </td>
         <td>${item.description}</td>
-        <td>${item.price}</td>
-        <td>${item.amount}</td>
+        <td>$<fmt:formatNumber value="${item.price}" maxFractionDigits="2"/></td>
+        <td>$<fmt:formatNumber value="${item.amount}" maxFractionDigits="2"/></td>
+        <td>
+            <form action = "cart" method="post">
+                <input type = "hidden" name="action" value="remove">
+                <input type = "hidden" name="description" value="${item.description}">
+                <button type ="submit">Remove</button>
+        </td>
+
     </tr>
     </c:forEach>
 </table>
+<p><b>To change the quantity</b>, enter the new quantity and click on the Update button.</p>
 
+<form action="cart" method="post">
+    <input type="hidden" name="action" value="continue">
+    <button type = "submit">Continue Shopping</button>
+</form>
+
+<form action="cart" method="post">
+    <input type="hidden" name="action"value="checkout">
+    <button type="submit">Checkout</button>
+</form>
 <p>Total: $${cart.total}</p>
 
 </body>
