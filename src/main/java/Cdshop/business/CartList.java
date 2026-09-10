@@ -17,6 +17,24 @@ public class CartList {
         cartItemList.add(cartItem);
     }
 
+    public void removeCartItem(String description){
+        CartItem itemToRemove = null;
+        for(CartItem c : cartItemList) {
+            if (c.getDescription().equals(description)) {
+                itemToRemove = c;
+            }
+
+        }
+        cartItemList.remove(itemToRemove);
+    }
+
+    public void updateCartItemQuantity(String description, int quantity){
+        for(CartItem c : cartItemList){
+            if (c.getDescription().equals(description)) {
+                c.setQuantity(quantity);
+            }
+        }
+    }
     public List<CartItem> getCartItemList() {return cartItemList;}
     public double getTotal() {
         double total = 0;

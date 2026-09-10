@@ -34,6 +34,7 @@
                 <input type = "hidden" name="action" value="remove">
                 <input type = "hidden" name="description" value="${item.description}">
                 <button type ="submit">Remove</button>
+            </form>
         </td>
 
     </tr>
@@ -47,10 +48,11 @@
 </form>
 
 <form action="cart" method="post">
-    <input type="hidden" name="action"value="checkout">
+    <input type="hidden" name="action" value="checkout">
+    <input type="hidden" name="total" value="${cart.total}">
     <button type="submit">Checkout</button>
 </form>
-<p>Total: $${cart.total}</p>
+<p>Total: $<fmt:formatNumber value="${cart.total}" maxFractionDigits="2"/></p>
 
 </body>
 </html>
