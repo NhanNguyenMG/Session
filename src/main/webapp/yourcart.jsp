@@ -47,9 +47,9 @@
     <button type = "submit">Continue Shopping</button>
 </form>
 
-<form action="cart" method="post">
-    <input type="hidden" name="action" value="checkout">
-    <input type="hidden" name="total" value="${cart.total}">
+<form action="payment" method="post">
+    <input type="hidden" name="orderInfo" value="Thanh toan don hang CDShop">
+    <input type="hidden" name="amount" value="${cart.total}">
     <button type="submit">Checkout</button>
 </form>
 <p>Total: $<fmt:formatNumber value="${cart.total}" maxFractionDigits="2"/></p>

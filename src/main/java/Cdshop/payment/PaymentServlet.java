@@ -13,7 +13,9 @@ import java.util.*;
 
 @WebServlet("/payment")
 public class PaymentServlet extends HttpServlet {
-    
+
+    private static final double USD_TO_VND_RATE = 25983;
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
@@ -30,13 +32,19 @@ public class PaymentServlet extends HttpServlet {
 
         String amount = request.getParameter("amount");
         if (amount == null || amount.isEmpty()) {
-            amount = "100000"; // Mặc định 100,000 VND
+            response.sendRedirect("yourcart.jsp");
+            return;
         }
+
+        double amountUSD = Double.parseDouble(amount);
+        double amountVND = amountUSD * USD_TO_VND_RATE;
+        long vnpAmount = Math.round(amountVND * 100);
+
         Map<String, String> vnp_Params = new HashMap<>();
         vnp_Params.put("vnp_Version", vnp_Version);
         vnp_Params.put("vnp_Command", vnp_Command);
         vnp_Params.put("vnp_TmnCode", vnp_TmnCode);
-        vnp_Params.put("vnp_Amount", String.valueOf(Integer.parseInt(amount) * 100));
+        vnp_Params.put("vnp_Amount", String.valueOf(vnpAmount));
         vnp_Params.put("vnp_CurrCode", "VND");
         vnp_Params.put("vnp_TxnRef", vnp_TxnRef);
         vnp_Params.put("vnp_OrderInfo", vnp_OrderInfo);

@@ -57,10 +57,6 @@ public class CdServlet extends HttpServlet {
 
         }
 
-        else if("checkout".equals(req.getParameter("action"))) {
-            double total = Double.parseDouble(req.getParameter("total"));
-            session.setAttribute("total", total);
-            resp.sendRedirect("thanks.jsp");
-        }
+
     }
 }

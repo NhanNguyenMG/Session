@@ -41,5 +41,9 @@ public class PaymentReturnServlet extends HttpServlet {
         } else {
              response.getWriter().println("<html><body><h3>Lỗi: Chữ ký không hợp lệ!</h3></body></html>");
         }
+        if ("00".equals(request.getParameter("vnp_TransactionStatus"))) {
+            request.getSession().removeAttribute("cart");
+            response.sendRedirect("payment_success.jsp?" + request.getQueryString());
+        }
     }
 }
